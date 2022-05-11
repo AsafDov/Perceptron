@@ -17,11 +17,11 @@ class Perceptron:
         # initialize the weights
         self.weights = np.random.rand(numOfInputs, 1) * 2 - 1
 
-    # Activation function - sigmoid, sign etc..    
+    # Activation function - sigmoid, sign etc..
     def activate(self, y):
         return np.sign(y)
 
-    # Receives inputs and returns outputs
+    # Receives inputs and returns the sign of the dot product with the weights
     def predict(self, inputs):
         y = np.dot(self.weights.T, inputs)
         return self.activate(y)
@@ -29,10 +29,9 @@ class Perceptron:
     # Training algorithm
     def train(self, inputs, target):
         guess = self.predict(inputs)
-        guess = int(guess)
         # print("Guess is:", guess)
         # print("Target is:", target)
         error = np.subtract(target, guess)
         # print("error is:", error)
-        self.weights = np.add(self.weights, np.multiply(error, inputs) * self.lr)  # Need to add learning rate
+        self.weights = np.add(self.weights, np.multiply(error, inputs) * self.lr)
         return error
